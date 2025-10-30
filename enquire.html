@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquire - Empowering the Nations</title>
+    <link rel="stylesheet" href="style.css">
+    <!--Links the external css file for the styling page-->
+</head>
+<body>
+    <!--Main container for wrapping all the pages content-->
+    <div class="container">
+        <header>
+            <!--Site logo-->
+            <div class="logo">Empowering the Nation</div>
+            <nav>
+                <!--Navigation menu-->
+                <!--Holds the list of the navigation links-->
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="course-pricing.html">Course Pricing</a></li>
+                    <li><a href="enquire.html">Enquire</a></li>
+                    <li><a href="location.html">Locations</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <article class="main-article">
+                <h2>Enquiry Form</h2>
+                <p>Please fill out the form below to get in touch with us.</p>
+                <!-- Starts the main enquiry form -->
+                <form class="enquiry-form">
+                    <!-- Form Group for First Name -->
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <!-- Form Group for Last Name -->
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <!-- Form Group for Email -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <!-- Form Group for Phone -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <!-- Form Group for Enquiry Message -->
+                    <div class="form-group">
+                        <label for="enquiry">Your Enquiry</label>
+                        <textarea id="enquiry" name="enquiry" required></textarea>
+                    </div>
+                    <!-- Form Buttons for Submit -->
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="reset" class="reset-btn">Reset</button>
+                    </div>
+                </form>
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Empowering the Nation. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Empowering the Nations</title>
+    <link rel="stylesheet" href="style.css">
+    <!--Links the external css file for the styling page-->
+</head> 
+<body>
+    <!--Main container for wrapping all the pages content-->
+    <div class="container">
+        <header>
+            <!--Site logo-->
+            <div class="logo">Empowering the Nation</div>
+            <nav>
+                <!--Navigation menu-->
+                <!--Holds the list of the navigation links-->
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="course-pricing.html">Course Pricing</a></li>
+                    <li><a href="enquire.html">Enquire</a></li>
+                    <li><a href="location.html">Locations</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content" id="courses-content">
+            <!-- This content will be dynamically updated by JavaScript -->
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Empowering the Nation. All rights reserved.</p>
+        </footer>
+    </div>
+    <!-- Added in JavaScript for the functionality -->
+    <!--Placed the javascript code here for better organization for future reference and understanding-->
+    <script>
+        const courseData = {
+            'First Aid': {
+                duration: 'Six-Month',
+                title: 'First Aid:',
+                fees: 'R1500',
+                purpose: 'To provide first aid awareness and basic life support',
+                content: ['Wounds and bleeding', 'Burns and fractures', 'Emergency scene', 'Cardio- Pulmonary Resuscitation CPR', 'Respiratory distress e.g, choking, blocked airway'],
+                image: 'firstaid.png'
+            },
+            'Sewing': {
+                duration: 'Six-Month',
+                title: 'Sewing:',
+                fees: 'R1500',
+                purpose: 'To provide alteration and new garment tailoring services',
+                content: ['Types of stitches', 'Threading a sewing machine', 'Sewing buttons, zips, hems and seams', 'Alterations', 'Designing and sewing new garments'],
+                image: 'sewing.png'
+            },
+            'Landscaping': {
+                duration: 'Six-Month',
+                title: 'Landscaping:',
+                fees: 'R1500',
+                purpose: 'To provide landscaping services for new and established gardens',
+                content: ['Indigenous and exotic plants and trees', 'Fixed structures (fountains, benches, etc)', 'Balancing of plants and trees in garden', 'Aesthetics of plant shapes and colours', 'Garden Layout'],
+                image: 'landscaping.png'
+            },
+            'Life skills': {
+                duration: 'Six-Month',
+                title: 'Life Skills:',
+                fees: 'R1500',
+                purpose: 'To provide skills to navigate basic life necessities',
+                content: ['Opening a bank account', 'Basic labour law (know your rights)', 'Basic reading and writing literacy', 'Basic numeric literacy'],
+                image: 'lifeskills.png'
+            },
+            'Child Minding': {
+                duration: 'Six-Week Short',
+                title: 'Child Minding:',
+                fees: 'R750',
+                purpose: 'To provide basic child and baby care',
+                content: ['Birth to six-month old baby needs', 'seven-month to one year old needs', 'Toddler needs', 'Educational toys'],
+                image: 'childminding.png'
+            },
+            'Cooking': {
+                duration: 'Six-Week Short',
+                title: 'Cooking:',
+                fees: 'R750',
+                purpose: 'To prepare and cook nutritious family meals',
+                content: ['Nutritional requirements for healthy body', 'Types of protein, carbs and vegetables', 'Tasty and nutritious recipes', 'Preparation and coking of meals'],
+                image: 'cooking.png'
+            },
+            'Garden Maintenance': {
+                duration: 'Six-Week Short',
+                title: 'Garden Maintenance:',
+                fees: 'R750',
+                purpose: 'To provide basic knowledge of watering, pruning and planting in a domestic garden',
+                content: ['Water restrictions and the watering requirements of indigenous and exotic plants', 'Pruning and propagation of plants', 'Planting techniques for different plant types'],
+                image: 'gardenmaintenance.png'
+            }
+        };
+
+        const contentDiv = document.getElementById('courses-content');
+
+        // Function to render the main courses page
+        // It separates courses into six-month and six-week categories and creates buttons.
+        function renderMainPage() {
+            const sixMonthCourses = Object.keys(courseData).filter(key => courseData[key].duration === 'Six-Month');
+            const sixWeekCourses = Object.keys(courseData).filter(key => courseData[key].duration === 'Six-Week Short');
+            contentDiv.innerHTML = `
+                <div style="background-color: #37533B; padding: 2rem; border-radius: 12px; color: #ffffff;">
+                    <h2 style="color: #FFD700; text-align: center; margin-bottom: 2rem;">Courses</h2>
+                    
+                    <h3 style="color: #FFD700; text-align: center;">Six-Month Courses:</h3>
+                    <div class="course-buttons">
+                        ${sixMonthCourses.map(course => `<button class="course-button" onclick="showCourse('${course}')">${course}</button>`).join('')}
+                    </div>
+
+                    <h3 style="color: #FFD700; text-align: center; margin-top: 2rem;">Six-Week Short Courses:</h3>
+                    <div class="course-buttons">
+                        ${sixWeekCourses.map(course => `<button class="course-button" onclick="showCourse('${course}')">${course}</button>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render a specific course page
+        function showCourse(courseName) {
+            const course = courseData[courseName];
+            if (!course) {
+                renderMainPage();
+                return;
+            }
+            
+            contentDiv.innerHTML = `
+                <div class="course-page-container">
+                    <h2 style="font-size: 2.5rem; color: #FFD700;">Courses</h2>
+                    <h3 style="font-size: 2rem; font-weight: 700;">${course.title}</h3>
+                    <p style="font-weight: 700;">Fees: ${course.fees}</p>
+                    <p style="font-weight: 700;">Purpose: ${course.purpose}</p>
+                    <p style="font-weight: 700;">Content:</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem; font-weight: 500;">
+                        ${course.content.map(item => `<li>• ${item}</li>`).join('')}
+                    </ul>
+                    <img src="images/${course.image}" alt="Image for ${course.title}" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    <button class="course-button" style="margin-top: 2rem; max-width: 200px; margin-left: auto; margin-right: auto;" onclick="renderMainPage()">Courses</button>
+                </div>
+            `;
+
+        }
+
+        // Initial render of the main page when the page loads
+        renderMainPage();
+    </script>
+
+</body>
+</html>

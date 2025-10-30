@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Pricing - Empowering the Nation</title>
+    <link rel="stylesheet" href="style.css">
+    <!--Links the external css file for the styling page-->
+</head>
+<body>
+    <!--Main container for wrapping all the pages content-->
+    <div class="container">
+        <header>
+            <!--Site logo-->
+            <div class="logo">Empowering the Nations</div>
+            <nav>
+                <!--Navigation menu-->
+                <!--Holds the list of the navigation links-->
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="course-pricing.html">Course Pricing</a></li>
+                    <li><a href="enquire.html">Enquire</a></li>
+                    <li><a href="location.html">Locations</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!--Main content area-->
+        <main class="main-content">
+            <!--Pricing section for course selection-->
+            <section class="pricing-section">
+                <h2 class="course-section-title">Select Courses</h2>
+                <form id="courseForm" class="course-pricing-form">
+                    <div class="course-list">
+                        <!-- Courses will be injected here by JS -->
+                    </div>
+                    <div class="total-section">
+                        <span class="total-label">Total:</span>
+                        <span id="totalAmount" class="total-amount">R0</span>
+                    </div>
+                    <div class="form-buttons">
+                        <!-- Button to submit the form -->
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 Empowering the Nation. All rights reserved.</p>
+        </footer>
+        <div id="popup" class="popup-message" style="display:none;"></div>
+    </div>
+    <!-- Added in JavaScript for the functionality -->
+    <script>
+        // Course data (same as in courses.html)
+        const courseData = {
+            'First Aid': { fees: 1500 },
+            'Sewing': { fees: 1500 },
+            'Landscaping': { fees: 1500 },
+            'Life skills': { fees: 1500 },
+            'Child Minding': { fees: 750 },
+            'Cooking': { fees: 750 },
+            'Garden Maintenance': { fees: 750 }
+        };
+        const courseListDiv = document.querySelector('.course-list');
+        const totalAmountSpan = document.getElementById('totalAmount');
+        const popup = document.getElementById('popup');
+
+        // Render course checkboxes
+        // Dinamically generates the course selection checkboxes into the form
+        function renderCourses() {
+            courseListDiv.innerHTML = Object.entries(courseData).map(([name, data], idx) => `
+                <label class="course-checkbox-label">
+                    <input type="checkbox" name="courses" value="${name}" data-fee="${data.fees}">
+                    <span class="course-name">${name}</span>
+                    <span class="course-fee">R${data.fees}</span>
+                </label>
+            `).join('');
+        }
+
+        // Calculate total cost based on selected courses
+        function calculateTotal() {
+            const checked = document.querySelectorAll('input[name="courses"]:checked');
+            let total = 0;
+            // Sum up the fees of selected courses
+            checked.forEach(cb => {
+                //Ensures the fee is treated as an integer for accurate calculation
+                total += parseInt(cb.getAttribute('data-fee'));
+            });
+            // Update the total amount display
+            totalAmountSpan.textContent = `R${total}`;
+        }
+
+        // Show popup message
+        function showPopup(message) {
+            popup.textContent = message;
+            popup.style.display = 'block';
+            setTimeout(() => { popup.style.display = 'none'; }, 3000);
+        }
+
+        // Handle form submit
+        document.getElementById('courseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const checked = document.querySelectorAll('input[name="courses"]:checked');
+            if (checked.length === 0) {
+                showPopup('Please select at least one course.');
+                // Stop form submission
+                // Exits the function if no courses are selected
+                return;
+            }
+            // Collect selected courses
+            const selectedCourses = Array.from(checked).map(cb => cb.value);
+            const total = totalAmountSpan.textContent;
+            // Simulate email sending (replace with real email logic/server in production)
+            setTimeout(() => {
+                showPopup('Your enquiry has been sent! Check your email for confirmation.');
+            }, 1000);
+        });
+
+        // Event listeners to detect any changes 
+        document.addEventListener('change', function(e) {
+            if (e.target && e.target.name === 'courses') {
+                calculateTotal();
+            }
+        });
+
+        // Initial render
+        // Renders all courses checkboxes when the page loads
+        renderCourses();
+        calculateTotal();
+    </script>
+</body>
+</html>
